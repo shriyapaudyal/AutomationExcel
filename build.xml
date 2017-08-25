@@ -1,0 +1,24 @@
+<project name="TestAutomation" basedir=".">
+    <property name="LIB" value="${basedir}/lib" />
+    <property name="BIN" value="${basedir}/bin" />
+    <path id="master-classpath">
+        <pathelement location="${BIN}" />
+        <fileset dir="${LIB}" includes="*.jar"/>
+    </path>
+     
+    <target name="generateReport">
+        <delete dir="${basedir}/testng-xslt">
+        </delete>
+        <mkdir dir="${basedir}/testng-xslt">
+        </mkdir>
+        <xslt in="${basedir}/test-output/testng-results.xml" style="${basedir}/testng-results.xsl" out="${basedir}/testng-xslt/index.html">
+            <param expression="${basedir}/testng-xslt/" name="testNgXslt.outputDir" />
+            <param expression="true" name="testNgXslt.sortTestCaseLinks" />
+            <param expression="FAIL,SKIP,PASS,CONF,BY_CLASS" name="testNgXslt.testDetailsFilter" />
+            <param expression="true" name="testNgXslt.showRuntimeTotals" />
+            <classpath refid="master-classpath">
+            </classpath>
+        </xslt>
+    </target>
+
+</project>
