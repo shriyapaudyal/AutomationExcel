@@ -8,7 +8,7 @@ import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Sheet;
+
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
@@ -29,14 +29,10 @@ public class excelconnection {
 
 				for (int j=0; j < c; j++) {
 					Cell cell = wb.getSheet(sheetName).getRow(i).getCell(j);
-				   
-                   
-                     CellType type = cell.getCellTypeEnum();
-                     if (type == CellType.NUMERIC) {
-               
-                  	  cell.setCellType(CellType.STRING);
-                  	 
-                     }
+					CellType type = cell.getCellTypeEnum();
+                    if (type == CellType.NUMERIC) {                 	 
+                 	  cell.setCellType(CellType.STRING);                 	 
+                    }
 					arrayExcelData[i][j] = cell.getStringCellValue();
 				}
 
@@ -75,8 +71,6 @@ public class excelconnection {
                     }
 
     }
-	
-	                    
 	                    
 
 }

@@ -23,9 +23,6 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 
-
-
-
 public class AddAgentArray {
 	
 	public WebDriver driver;
@@ -70,83 +67,70 @@ public class AddAgentArray {
 			
 	 }
 	 
- String[] agentlist =new String[]{"id","username","email","password","password1", "name","prefrences","suburb","address","phone","fax","facebook","twitter","linkedin","website","title"};
+ String[] agentlist =new String[]{"title","id","username","email","password","password1", "name","prefrences","suburb","address","phone","fax","facebook","twitter","linkedin","website"};
 // String[] propertyList = new String[]{"title", "category", "area", "bathroom", "bedroom", "garage", "asd", "dsdf", "purpose", "price", "suburbs", "address"};
-
+ 
  
   @Test( dataProvider="agentlogin",priority =2 )
 
  public void LoginAgent(String[] agentlist) throws InterruptedException
   {
-	
-	  if(agentlist != null && agentlist.length>0)
-	  {
-		  
-	
 		//driver.navigate().refresh();
-		
 		driver.findElement(By.xpath("html/body/div[1]/aside/div/section/ul/li[4]/a[contains(.,'Agents')]")).click();
 		driver.findElement(By.xpath("html/body/div[1]/div/section[2]/form/div[2]/div[1]/div/a[contains(.,'New')]")).click() ;
 		//id
-		driver.findElement(By.id("internal_id")).sendKeys(agentlist[0]+lp.SetRandomString());
+		driver.findElement(By.id("internal_id")).sendKeys(agentlist[1]);
 		//username		
-		driver.findElement(By.id("username")).sendKeys(agentlist[1]+lp.SetRandomString());				
+		driver.findElement(By.id("username")).sendKeys(agentlist[2]);				
 		//email				
-		driver.findElement(By.id("email")).sendKeys(lp.SetRandomString()+agentlist[2]);				
+		driver.findElement(By.id("email")).sendKeys(agentlist[3]);				
 		//password		
-		driver.findElement(By.id("password")).sendKeys(agentlist[3]);				
+		driver.findElement(By.id("password")).sendKeys(agentlist[4]);				
 		//password1				
-		driver.findElement(By.id("password2")).sendKeys(agentlist[4]);				
+		driver.findElement(By.id("password2")).sendKeys(agentlist[5]);				
 		//username		
-		driver.findElement(By.id("name")).sendKeys(agentlist[5]+lp.SetRandomString());				
+		driver.findElement(By.id("name")).sendKeys(agentlist[6]);				
 		//description		
-		driver.findElement(By.id("preferences")).sendKeys(agentlist[6]);
+		driver.findElement(By.id("preferences")).sendKeys(agentlist[7]);
 		//suburb				
-		driver.findElement(By.id("area_search")).sendKeys(agentlist[7]);
+		driver.findElement(By.id("area_search")).sendKeys(agentlist[8]);
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//*[starts-with(@id,'ui-id-')]")).click();
     	//address			
-		driver.findElement(By.id("address")).sendKeys(agentlist[8]);
+		driver.findElement(By.id("address")).sendKeys(agentlist[9]);
 		//phone
 		Thread.sleep(500);
-		driver.findElement(By.id("phone")).sendKeys(agentlist[9]);
+		driver.findElement(By.id("phone")).sendKeys(agentlist[10]);
 		//fax
-		driver.findElement(By.id("fax")).sendKeys(agentlist[10]);
+		driver.findElement(By.id("fax")).sendKeys(agentlist[11]);
 		//zipcode
-				//String zipcode1=ExcelConnect.getCellValue(path, sheet, i, count++);
-				//driver.findElement(By.id("zipcode")).sendKeys(zipcode1);
+		//String zipcode1=ExcelConnect.getCellValue(path, sheet, i, count++);
+		//driver.findElement(By.id("zipcode")).sendKeys(zipcode1);
 		//facebook
-		driver.findElement(By.id("facebook")).sendKeys(agentlist[11]);
+		driver.findElement(By.id("facebook")).sendKeys(agentlist[12]);
 		//twitter
-		driver.findElement(By.id("twitter")).sendKeys(agentlist[12]);
+		driver.findElement(By.id("twitter")).sendKeys(agentlist[13]);
 		//linkedin
-		driver.findElement(By.id("linkedin")).sendKeys(agentlist[13]);
+		driver.findElement(By.id("linkedin")).sendKeys(agentlist[14]);
 		//website
-		driver.findElement(By.id("website")).sendKeys(agentlist[14]);	
-			
+		driver.findElement(By.id("website")).sendKeys(agentlist[15]);	
 		driver.findElement(By.name("saveAgent")).click();				
-	
-		 String actualTitleDisplayed = driver.getTitle();
-		  String requiredTitleMessage = agentlist[15];
-		
-		  Assert.assertEquals(actualTitleDisplayed,requiredTitleMessage);
-		  
-		  
-		  
-		  } 
-  }
-  
+		String actualTitleDisplayed = driver.getTitle();
+		String requiredTitleMessage = agentlist[0];
+		Assert.assertEquals(actualTitleDisplayed,requiredTitleMessage);
+		} 
   excelconnection ex = new excelconnection();
-	String path="D:/eclipse/backup.xlsx";
+	String path="D:/eclipse/agents.xlsx";
 	String sheet = "agents";
+	
   @DataProvider(name="agentlogin")
 	public Object[][] loginData() throws EncryptedDocumentException, InvalidFormatException 
   {
 	  int rownum= ex.getRowCount(path, sheet);
+	  System.out.println(rownum);
 			Object[][] arrayObject = ex.getExcelData(path, sheet, rownum+1, 16);
 			return arrayObject;
 	}
-
   
   @AfterTest
 	public void tearDown() throws InterruptedException {
@@ -154,9 +138,7 @@ public class AddAgentArray {
 		//driver.findElement(By.xpath("html/body/div[1]/header/nav/div/ul/li[3]/a")).click();
 		//driver.findElement(By.xpath("html/body/div[1]/header/nav/div/ul/li[3]/ul/li[4]/a")).click();
 	driver.quit();
-	 
 		}
 
-	
 }
 

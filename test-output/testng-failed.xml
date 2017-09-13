@@ -3,13 +3,13 @@
 <suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.braindigit.addagent.AddAgentArray">
+      <class name="com.braindigit.addagent.LoginAutomate">
         <methods>
+          <include name="setFirst"/>
+          <include name="login" invocation-numbers="0 1 2 3 4"/>
           <include name="tearDown"/>
-          <include name="LoginAgent" invocation-numbers="0"/>
-          <include name="openDriver"/>
         </methods>
-      </class> <!-- com.braindigit.addagent.AddAgentArray -->
+      </class> <!-- com.braindigit.addagent.LoginAutomate -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
